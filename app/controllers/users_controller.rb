@@ -25,6 +25,7 @@ class UsersController < ApplicationController
   # GET /users/new.xml
   def new
     @user = User.new
+    @title = 'sign up'
 
     respond_to do |format|
       format.html # new.html.erb
@@ -42,15 +43,15 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
 
-    respond_to do |format|
+
       if @user.save
-        format.html { redirect_to(@user, :notice => 'User was successfully created.') }
-        format.xml  { render :xml => @user, :status => :created, :location => @user }
+        flash[:success] = "Welcome to the Sample App!"
+       redirect_to @user
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+         @title = "Sign up"
+         render 'new'
       end
-    end
+
   end
 
   # PUT /users/1
