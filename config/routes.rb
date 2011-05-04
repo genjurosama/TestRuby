@@ -2,12 +2,17 @@ TestRuby::Application.routes.draw do
 
 
 
+  get "sessions/new"
+
   match '/contact', :to => 'pages#contact'
   match '/about',   :to => 'pages#about'
   match '/help',    :to => 'pages#help'
   match '/signup',   :to => 'users#new'
   match '/', :to => 'pages#home'
-   root :to => 'pages#home'
+  root :to => 'pages#home'
+  match '/signin',  :to => 'sessions#new'
+  match '/signout', :to => 'sessions#destroy'
+
 
 
   get "users/new"
@@ -18,6 +23,7 @@ TestRuby::Application.routes.draw do
   resources :microposts
 
   resources :users
+  resources :sessions, :only => [:new, :create, :destroy]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

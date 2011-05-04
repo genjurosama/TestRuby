@@ -10,12 +10,12 @@
     <div class="container">
       <%= render 'layouts/header' %>
       <section class="round">
-       <%- flash.each do |flash_type, message| -%>
-            <div id=" <%= flash_type %>" class="flash <%= flash_type %>"><%= message %></div>
-            <% content_tag :script, :type => "text/javascript" do %>
-           setTimeout("new Effect.Fade('<%= flash_type %>');", 1000);
-         <% end %>
-        <%- end -%>
+          <%- flash.each do |flash_type, message| -%>
+          <%= content_tag :div, message, :class => "flash #{flash_type}", :id => flash_type %>
+          <% content_tag :script, :type => "text/javascript" do %>
+            setTimeout("new Effect.Fade('<%= flash_type %>');", 1000);
+          <% end %>
+            <%- end -%>
         <%= yield %>
       </section>
       <%= render 'layouts/footer' %>
